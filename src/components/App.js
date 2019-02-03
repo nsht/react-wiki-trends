@@ -7,8 +7,11 @@ class App extends Component {
   // the API only has the previous days data
   yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).getDate();
   // in case previous date has no data
-  day_before_yesterday = new Date(new Date().setDate(new Date().getDate() - 2)).getDate();
+  day_before_yesterday = new Date(
+    new Date().setDate(new Date().getDate() - 2)
+  ).getDate();
   month = this.current_date_obj.getMonth() + 1;
+
   state = {
     trendingArticles: [],
     trendDisplay: [],
@@ -33,9 +36,8 @@ class App extends Component {
         return response.json();
       })
       .then(response => {
-        console.log(response)
         this.setState({
-          trendingArticles: response
+          trendingArticles: response.items[0].articles
         });
         return response;
       })
@@ -59,13 +61,49 @@ class App extends Component {
         }
       })
       .catch(error => {
+        console.log(error);
+
         this.setState({
-          day:this.day_before_yesterday > 9 ? this.day_before_yesterday : `0${this.day_before_yesterday}`
-        })
+          day:
+            this.day_before_yesterday > 9
+              ? this.day_before_yesterday
+              : `0${this.day_before_yesterday}`
+        });
         this.getTrends(this.state.day, this.state.month, this.state.year);
       });
   }
 
+  componentDidUpdate() {
+    console.log("component_updated");
+    let articles = this.state.trendingArticles;
+    if (articles.length > 0) {
+      trimmedArticles = this.trimData(articles);
+      if(trimmedArticles.length !== articles.length){
+        this.setState({
+          trendingArticles:trimmedArticles,
+          trendDisplay:trimmedArticles.slice(0,10)
+        })
+      }
+    }
+  }
+
+  trimData = articles => {
+    const nonArticlePages = [
+      "Main_Page",
+      "Special:Search",
+      "Special:CreateAccount",
+      "Special:Watchlist",
+      "Special:RecentChangesLinked",
+      "Special:ElectronPdf",
+      "Portal:Current_events",
+      "Special:MobileOptions",
+      "Special:MobileMenu"
+    ];
+    let trimmedArticles = articles.filter(
+      single_article => !nonArticlePages.includes(single_article.article)
+    );
+    return trimmedArticles
+  };
   render() {
     return <div className="App" />;
   }
