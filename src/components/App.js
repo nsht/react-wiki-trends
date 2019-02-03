@@ -78,17 +78,17 @@ class App extends Component {
     console.log("component_updated");
     let articles = this.state.trendingArticles;
     if (articles.length > 0) {
-      const trimmedArticles = this.trimData(articles);
-      if(trimmedArticles.length !== articles.length){
+      const filteredArticles = this.filterData(articles);
+      if(filteredArticles.length !== articles.length){
         this.setState({
-          trendingArticles:trimmedArticles,
-          trendDisplay:trimmedArticles.slice(0,10)
+          trendingArticles:filteredArticles,
+          trendDisplay:filteredArticles.slice(0,10)
         })
       }
     }
   }
 
-  trimData = articles => {
+  filterData = articles => {
     const nonArticlePages = [
       "Main_Page",
       "Special:Search",
@@ -101,10 +101,10 @@ class App extends Component {
       "Special:MobileMenu",
       "Special:Book"
     ];
-    let trimmedArticles = articles.filter(
+    let filteredArticles = articles.filter(
       single_article => !nonArticlePages.includes(single_article.article)
     );
-    return trimmedArticles
+    return filteredArticles
   };
   render() {
     return <div className="App" />;
