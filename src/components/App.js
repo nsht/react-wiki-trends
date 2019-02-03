@@ -66,7 +66,8 @@ class App extends Component {
         // this could happen if the call is made before the data for the day is updated by wikimedia
         // TODO handle previous month and Year cases will be better to use a date library like moment js
         this.setState({
-          day:this.day_before_yesterday > 9
+          day:
+            this.day_before_yesterday > 9
               ? this.day_before_yesterday
               : `0${this.day_before_yesterday}`
         });
@@ -79,11 +80,11 @@ class App extends Component {
     let articles = this.state.trendingArticles;
     if (articles.length > 0) {
       const filteredArticles = this.filterData(articles);
-      if(filteredArticles.length !== articles.length){
+      if (filteredArticles.length !== articles.length) {
         this.setState({
-          trendingArticles:filteredArticles,
-          trendDisplay:filteredArticles.slice(0,10)
-        })
+          trendingArticles: filteredArticles,
+          trendDisplay: filteredArticles.slice(0, 10)
+        });
       }
     }
   }
@@ -104,8 +105,9 @@ class App extends Component {
     let filteredArticles = articles.filter(
       single_article => !nonArticlePages.includes(single_article.article)
     );
-    return filteredArticles
+    return filteredArticles;
   };
+
   render() {
     return <div className="App" />;
   }
