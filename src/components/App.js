@@ -98,7 +98,8 @@ class App extends Component {
       "Special:ElectronPdf",
       "Portal:Current_events",
       "Special:MobileOptions",
-      "Special:MobileMenu"
+      "Special:MobileMenu",
+      "Special:Book"
     ];
     let trimmedArticles = articles.filter(
       single_article => !nonArticlePages.includes(single_article.article)
