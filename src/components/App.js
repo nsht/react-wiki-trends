@@ -62,10 +62,11 @@ class App extends Component {
       })
       .catch(error => {
         console.log(error);
-
+        // change the date to that of day before yesterday in case yesterday's date has no data
+        // this could happen if the call is made before the data for the day is updated by wikimedia
+        // TODO handle previous month and Year cases will be better to use a date library like moment js
         this.setState({
-          day:
-            this.day_before_yesterday > 9
+          day:this.day_before_yesterday > 9
               ? this.day_before_yesterday
               : `0${this.day_before_yesterday}`
         });
@@ -77,7 +78,7 @@ class App extends Component {
     console.log("component_updated");
     let articles = this.state.trendingArticles;
     if (articles.length > 0) {
-      trimmedArticles = this.trimData(articles);
+      const trimmedArticles = this.trimData(articles);
       if(trimmedArticles.length !== articles.length){
         this.setState({
           trendingArticles:trimmedArticles,
