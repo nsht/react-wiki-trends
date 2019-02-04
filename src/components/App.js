@@ -53,7 +53,6 @@ class App extends Component {
         console.log(error);
         // change the date to that of day before yesterday in case yesterday's date has no data
         // this could happen if the call is made before the data for the day is updated by wikimedia
-        // TODO handle previous month and Year cases will be better to use a date library like moment js
         this.setState({
           date_str: moment().subtract(2,'days').format('YYYY/MM/DD')
         });
