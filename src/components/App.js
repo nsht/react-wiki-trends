@@ -1,28 +1,19 @@
 import React, { Component } from "react";
 import "../css/App.css";
+import moment from 'moment';
 
 class App extends Component {
-  current_date_obj = new Date();
-  yesterday_date_obj = new Date();
-  // the API only has the previous days data
-  yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).getDate();
-  // in case previous date has no data
-  day_before_yesterday = new Date(
-    new Date().setDate(new Date().getDate() - 2)
-  ).getDate();
-  month = this.current_date_obj.getMonth() + 1;
-
+  // Api only has data of the previous day
+  yesterday = moment().subtract(1,'days').format('YYYY/MM/DD')
   state = {
     trendingArticles: [],
     trendDisplay: [],
-    day: this.yesterday > 9 ? this.yesterday : `0${this.yesterday}`,
-    month: this.month > 9 ? this.month : `0${this.month}`,
-    year: this.current_date_obj.getFullYear()
+    date_str: this.yesterday,
   };
 
-  getTrends = (day, month, year) => {
+  getTrends = (date_str) => {
     const apidata = fetch(
-      `https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/${year}/${month}/${day}`,
+      `https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/${date_str}`,
       {
         headers: {
           Origin: "*"
@@ -49,9 +40,7 @@ class App extends Component {
 
   componentDidMount() {
     const data = this.getTrends(
-      this.state.day,
-      this.state.month,
-      this.state.year
+      this.state.date_str,
     );
 
     data
@@ -66,12 +55,9 @@ class App extends Component {
         // this could happen if the call is made before the data for the day is updated by wikimedia
         // TODO handle previous month and Year cases will be better to use a date library like moment js
         this.setState({
-          day:
-            this.day_before_yesterday > 9
-              ? this.day_before_yesterday
-              : `0${this.day_before_yesterday}`
+          date_str: moment().subtract(2,'days').format('YYYY/MM/DD')
         });
-        this.getTrends(this.state.day, this.state.month, this.state.year);
+        this.getTrends(this.state.date_str);
       });
   }
 
