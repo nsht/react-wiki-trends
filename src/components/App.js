@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css/App.css";
 import moment from 'moment';
+import InsightsDisplay from './InsightsDisplay';
 
 class App extends Component {
   // Api only has data of the previous day
@@ -94,7 +95,11 @@ class App extends Component {
   };
 
   render() {
-    return <div className="App" />;
+    return(
+      <div className="App" >
+        <InsightsDisplay trendDisplay={this.state.trendDisplay} />
+      </div>
+    );
   }
 }
 
