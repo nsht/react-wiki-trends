@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/App.css";
 import moment from 'moment';
 import InsightsDisplay from './InsightsDisplay';
+import Paper from '@material-ui/core/Paper';
 
 class App extends Component {
   // Api only has data of the previous day
@@ -97,7 +98,10 @@ class App extends Component {
   render() {
     return(
       <div className="App" >
+      <h1>WikiPedia Trends</h1>
+      <Paper className="paper-container">
         <InsightsDisplay trendDisplay={this.state.trendDisplay} />
+      </Paper>
       </div>
     );
   }
