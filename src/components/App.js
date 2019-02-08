@@ -50,8 +50,9 @@ class App extends Component {
         return response.json();
       })
       .then(response => {
-        console.log(response);
         const trendDisplay = this.state.trendDisplay;
+        //  TODO the trends are inserted in a random order due to async function
+        // need to find a way to insert or display according to actual trending rank
         trendDisplay.push(response)
         this.setState({
           trendDisplay
