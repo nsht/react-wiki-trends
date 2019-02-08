@@ -36,11 +36,24 @@ pre {
 
 .paper-container {
   width: 80%;
-  height:70%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.article-card{
-  max-width: 140px;
+.article-card {
+  height: 200px;
+  width: 200px;
+  margin: 5px;
+}
+
+.rank{
+  font-size: 1.3em;
+  color:grey;
+  margin: 5px;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
