@@ -5,8 +5,9 @@ const InsightsDisplay = (props) => {
   return (
     <>
     {props.trendDisplay.map((key,index) =>(
-      <Paper className="article-card" key={key.rank}>
-      {key.article}
+      <Paper className="article-card" key={index}>
+      <span className="rank">#{index+1}</span>
+      <div>{key.displaytitle}</div>
       </Paper>
     ))}
     </>
