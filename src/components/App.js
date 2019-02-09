@@ -90,7 +90,7 @@ class App extends Component {
     if (articles.length > 0) {
       const filteredArticles = this.filterData(articles);
       if (filteredArticles.length !== articles.length) {
-        let trendDisplay = filteredArticles.slice(0, 10).map(article =>
+        let trendDisplay = filteredArticles.slice(0, 12).map(article =>
           this.getSummary(article.article)
         );
         this.setState({
@@ -123,9 +123,9 @@ class App extends Component {
     return (
       <div className="App">
         <h1>WikiPedia Trends</h1>
-        <Paper className="paper-container">
+        <div className="paper-container">
           <InsightsDisplay trendDisplay={this.state.trendDisplay} />
-        </Paper>
+        </div>
       </div>
     );
   }
