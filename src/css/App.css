@@ -27,7 +27,6 @@ pre {
 }
 
 .App {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,8 +34,6 @@ pre {
 }
 
 .paper-container {
-  width: 90%;
-  height: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,28 +42,46 @@ pre {
 }
 
 .article-card {
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   margin: 15px;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .rank {
   font-size: 1.3em;
   color: grey;
   margin: 5px;
+  grid-row-start: 1;
+  grid-column-start: 1;
 }
 
-h1{
-  font-family: 'Pacifico', cursive;
+h1 {
+  font-family: "Pacifico", cursive;
 }
 
-.article-image{
-  max-width: 100px;
-  max-height: 100px;
+.article-title {
+  grid-row-start: 1;
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+.image-container{
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-row-end: 5;
+  grid-column-end: 3;
+  object-fit: cover;
+}
+.article-image {
+  max-height: 100%;
+
 }
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500|Pacifico");
 
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
