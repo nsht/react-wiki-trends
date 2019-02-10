@@ -44,10 +44,9 @@ class App extends Component {
   getSummary = article_slug => {
     const summary = fetch(
       `https://en.wikipedia.org/api/rest_v1/page/summary/${article_slug}`
-    )
-      .then(response => {
-        return response.json();
-      });
+    ).then(response => {
+      return response.json();
+    });
     return summary;
   };
 
@@ -82,23 +81,24 @@ class App extends Component {
       const filteredArticles = this.filterData(articles);
       // To ensure an infinite loop does not occur due to componentDidUpdate firing due to state update
       if (filteredArticles.length !== articles.length) {
-        let trendDataTemp = {}
-        filteredArticles.slice(0,12).map(article=>(
-          this.getSummary(article.article).then(article=>{
-            trendDataTemp[article.titles.canonical] = article
-            if(Object.keys(trendDataTemp).length>11){
+        let trendDataTemp = {};
+        filteredArticles.slice(0, 12).map(article =>
+          this.getSummary(article.article).then(article => {
+            trendDataTemp[article.titles.canonical] = article;
+            if (Object.keys(trendDataTemp).length > 11) {
               this.setState({
-                trendData:trendDataTemp,
-                trendDisplay: filteredArticles.slice(0,12).map(article=>article.article)
-              })
+                trendData: trendDataTemp,
+                trendDisplay: filteredArticles
+                  .slice(0, 12)
+                  .map(article => article.article)
+              });
             }
           })
-        )); //map end
+        ); //map end
 
         this.setState({
-          trendingArticles: filteredArticles,
+          trendingArticles: filteredArticles
         });
-
       }
     }
   }
@@ -127,7 +127,10 @@ class App extends Component {
       <div className="App">
         <h1>WikiPedia Trends</h1>
         <div className="paper-container">
-          <InsightsDisplay trendDisplay={this.state.trendDisplay} trendData={this.state.trendData}/>
+          <InsightsDisplay
+            trendDisplay={this.state.trendDisplay}
+            trendData={this.state.trendData}
+          />
         </div>
       </div>
     );
