@@ -13,16 +13,16 @@ const InsightsDisplay = props => {
     <>
       {props.trendDisplay.map((key, index) => (
         <Paper className="article-card" key={index}>
-          <span className="rank">#{index + 1}</span>
-          <div className="article-title">{key.displaytitle}</div>
-          <div className="image-container">
-          <img
-            src={getThumbnail(key)}
-            alt={`${key.displaytitle}`}
-            className="article-image"
-          />
-          </div>
-        </Paper>
+        <span className="rank">#{index + 1}</span>
+        <div className="article-title">{props.trendData[key].title}</div>
+        <div className="image-container">
+        <img
+          src={getThumbnail(props.trendData[key])}
+          alt={`${props.trendData[key].displaytitle}`}
+          className="article-image"
+        />
+        </div>
+      </Paper>
       ))}
     </>
   );
