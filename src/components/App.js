@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "../css/App.css";
 import moment from "moment";
 import InsightsDisplay from "./InsightsDisplay";
-import Paper from "@material-ui/core/Paper";
-
 class App extends Component {
   // Api only has data of the previous day
   yesterday = moment()
@@ -12,6 +10,7 @@ class App extends Component {
   state = {
     trendingArticles: [],
     trendDisplay: [],
+    trendData: {},
     date_str: this.yesterday
   };
 
@@ -48,15 +47,6 @@ class App extends Component {
     )
       .then(response => {
         return response.json();
-      })
-      .then(response => {
-        const trendDisplay = this.state.trendDisplay;
-        //  TODO the trends are inserted in a random order due to async function
-        // need to find a way to insert or display according to actual trending rank
-        trendDisplay.push(response)
-        this.setState({
-          trendDisplay
-        })
       });
     return summary;
   };
@@ -72,7 +62,6 @@ class App extends Component {
         }
       })
       .catch(error => {
-        // console.log(error);
         // change the date to that of day before yesterday in case yesterday's date has no data
         // this could happen if the call is made before the data for the day is updated by wikimedia
         this.setState({
@@ -86,16 +75,30 @@ class App extends Component {
 
   componentDidUpdate() {
     console.log("component_updated");
+    // TODO remove this logic from componentDidUpdate
+    // Add it to the promise resolve of the initial api call
     let articles = this.state.trendingArticles;
     if (articles.length > 0) {
       const filteredArticles = this.filterData(articles);
+      // To ensure an infinite loop does not occur due to componentDidUpdate firing due to state update
       if (filteredArticles.length !== articles.length) {
-        let trendDisplay = filteredArticles.slice(0, 12).map(article =>
-          this.getSummary(article.article)
-        );
+        let trendDataTemp = {}
+        filteredArticles.slice(0,12).map(article=>(
+          this.getSummary(article.article).then(article=>{
+            trendDataTemp[article.titles.canonical] = article
+            if(Object.keys(trendDataTemp).length>11){
+              this.setState({
+                trendData:trendDataTemp,
+                trendDisplay: filteredArticles.slice(0,12).map(article=>article.article)
+              })
+            }
+          })
+        )); //map end
+
         this.setState({
           trendingArticles: filteredArticles,
         });
+
       }
     }
   }
@@ -124,7 +127,7 @@ class App extends Component {
       <div className="App">
         <h1>WikiPedia Trends</h1>
         <div className="paper-container">
-          <InsightsDisplay trendDisplay={this.state.trendDisplay} />
+          <InsightsDisplay trendDisplay={this.state.trendDisplay} trendData={this.state.trendData}/>
         </div>
       </div>
     );
