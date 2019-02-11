@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../css/App.css";
 import moment from "moment";
 import InsightsDisplay from "./InsightsDisplay";
+import {getSummary} from "../helpers";
+
 class App extends Component {
   // Api only has data of the previous day
   yesterday = moment()
@@ -41,14 +43,7 @@ class App extends Component {
     return apidata;
   };
 
-  getSummary = article_slug => {
-    const summary = fetch(
-      `https://en.wikipedia.org/api/rest_v1/page/summary/${article_slug}`
-    ).then(response => {
-      return response.json();
-    });
-    return summary;
-  };
+
 
   // https://en.wikipedia.org/api/rest_v1/page/summary/September_11_attacks
   componentDidMount() {
@@ -83,7 +78,7 @@ class App extends Component {
       if (filteredArticles.length !== articles.length) {
         let trendDataTemp = {};
         filteredArticles.slice(0, 12).map(article =>
-          this.getSummary(article.article).then(article => {
+          getSummary(article.article).then(article => {
             trendDataTemp[article.titles.canonical] = article;
             if (Object.keys(trendDataTemp).length > 11) {
               this.setState({
