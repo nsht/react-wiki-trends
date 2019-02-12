@@ -63,7 +63,7 @@ h1 {
   grid-column-end: 5;
 }
 
-.image-container{
+.image-container {
   grid-row-start: 2;
   grid-column-start: 1;
   grid-row-end: 5;
@@ -74,12 +74,12 @@ h1 {
   max-height: 100%;
 }
 
-.card-media{
+.card-media {
   padding-top: 76.25%;
-  background-position:top !important;
+  background-position: top !important;
 }
 
-.article-link{
+.article-link {
   text-decoration: none;
 }
 

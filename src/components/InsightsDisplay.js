@@ -23,12 +23,17 @@ const InsightsDisplay = props => {
     <>
       {props.trendDisplay.map((key, index) => (
         <Card className="article-card" key={index}>
-        <a className="article-link" href={props.trendData[key].content_urls.desktop.page} target="_blank" rel="noopener noreferrer">
-          <CardHeader
-            avatar={<Avatar aria-label="Rank">{index + 1}</Avatar>}
-            title={props.trendData[key].displaytitle}
-            // subheader={props.trendData[key].description}
-          />
+          <a
+            className="article-link"
+            href={props.trendData[key].content_urls.desktop.page}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <CardHeader
+              avatar={<Avatar aria-label="Rank">{index + 1}</Avatar>}
+              title={props.trendData[key].displaytitle}
+              // subheader={props.trendData[key].description}
+            />
           </a>
           <CardMedia
             className="card-media"
@@ -37,8 +42,8 @@ const InsightsDisplay = props => {
           />
           <CardContent>
             <Typography component="p">
-            {/* todo truncate */}
-            {props.trendData[key].extract}
+              {/* todo truncate */}
+              {props.trendData[key].extract}
             </Typography>
           </CardContent>
         </Card>

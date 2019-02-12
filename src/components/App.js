@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/App.css";
 import moment from "moment";
 import InsightsDisplay from "./InsightsDisplay";
-import {getSummary} from "../helpers";
+import { getSummary } from "../helpers";
 
 class App extends Component {
   // Api only has data of the previous day
@@ -42,8 +42,6 @@ class App extends Component {
       });
     return apidata;
   };
-
-
 
   // https://en.wikipedia.org/api/rest_v1/page/summary/September_11_attacks
   componentDidMount() {
