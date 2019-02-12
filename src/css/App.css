@@ -42,20 +42,15 @@ pre {
 }
 
 .article-card {
-  height: 250px;
-  width: 250px;
+  height: 450px;
+  width: 350px;
   margin: 15px;
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  grid-template-columns: repeat(4, 1fr);
 }
 
 .rank {
   font-size: 1.3em;
   color: grey;
   margin: 5px;
-  grid-row-start: 1;
-  grid-column-start: 1;
 }
 
 h1 {
@@ -77,7 +72,15 @@ h1 {
 }
 .article-image {
   max-height: 100%;
+}
 
+.card-media{
+  padding-top: 76.25%;
+  background-position:top !important;
+}
+
+.article-link{
+  text-decoration: none;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500|Pacifico");
