@@ -5,6 +5,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
+// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 const InsightsDisplay = props => {
   const getThumbnail = (obj, default_value = "") => {
@@ -22,7 +25,8 @@ const InsightsDisplay = props => {
             className="article-link"
             href={props.trendData[key].content_urls.desktop.page}
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             <CardHeader
               avatar={<Avatar aria-label="Rank">{index + 1}</Avatar>}
               title={props.trendData[key].displaytitle}
@@ -41,6 +45,11 @@ const InsightsDisplay = props => {
               {props.trendData[key].description}
             </Typography>
           </CardContent>
+          <CardActions className="card-action-container">
+            <Button variant="outlined" size="medium" color="primary" className="trend-button">
+              View Trends
+            </Button>
+          </CardActions>
         </Card>
       ))}
     </>
