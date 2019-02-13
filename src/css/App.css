@@ -76,11 +76,16 @@ h1 {
 
 .card-media {
   padding-top: 76.25%;
-  background-position: top !important;
+  /* background-position: top !important; */
 }
 
 .article-link {
   text-decoration: none;
+}
+
+.card-header{
+  height: 20px;
+  border-bottom: solid 1px whitesmoke;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500|Pacifico");
