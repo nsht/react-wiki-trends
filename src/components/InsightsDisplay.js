@@ -22,11 +22,11 @@ const InsightsDisplay = props => {
             className="article-link"
             href={props.trendData[key].content_urls.desktop.page}
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <CardHeader
               avatar={<Avatar aria-label="Rank">{index + 1}</Avatar>}
               title={props.trendData[key].displaytitle}
+              className="card-header"
               // subheader={props.trendData[key].description}
             />
           </a>
@@ -38,7 +38,7 @@ const InsightsDisplay = props => {
           <CardContent>
             <Typography component="p">
               {/* todo truncate */}
-              {props.trendData[key].extract}
+              {props.trendData[key].description}
             </Typography>
           </CardContent>
         </Card>
