@@ -43,7 +43,7 @@ const InsightCard = (props) =>{
           <CardContent>
             <Typography component="p">
               {/* todo truncate */}
-              {props.trendData.description}
+              {props.trendData.description.replace(/^\w/, c => c.toUpperCase())}
             </Typography>
           </CardContent>
           <CardActions className="card-action-container">
